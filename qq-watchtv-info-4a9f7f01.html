@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>NBA直播 · 资料整理与信息索引</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f6fbfb;
+      color: #1f2f2e;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a {
+      text-decoration: none;
+      color: #2a7f7a;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: #1b5e59;
+    }
+
+    /* 布局容器 */
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Hero 区 — 资料索引的入口 */
+    .hero {
+      background: linear-gradient(145deg, #d9f0ee 0%, #b5e0db 100%);
+      padding: 60px 20px 50px;
+      border-radius: 0 0 48px 48px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(42, 127, 122, 0.08);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #074a45;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto 20px;
+      font-size: 1.05rem;
+      color: #1b4b47;
+    }
+    .hero .tagline {
+      display: inline-block;
+      background: #ffffffcc;
+      backdrop-filter: blur(4px);
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      color: #05645c;
+      border: 1px solid #8acfc7;
+    }
+
+    /* 网格卡片区域 — 优势 / 整理角度 */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 28px 20px 24px;
+      box-shadow: 0 4px 10px rgba(30, 70, 67, 0.04);
+      border: 1px solid #d1eae7;
+      transition: transform 0.15s ease, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(42, 127, 122, 0.08);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #1b6b64;
+      margin-bottom: 10px;
+      border-left: 4px solid #49b5ac;
+      padding-left: 12px;
+    }
+    .card p {
+      font-size: 0.96rem;
+      color: #2c4441;
+      margin-bottom: 6px;
+    }
+
+    /* 说明区 + 要点整合 */
+    .intro-block {
+      background: #edf7f5;
+      border-radius: 28px;
+      padding: 36px 28px;
+      margin: 32px 0;
+      border: 1px solid #b7dbd5;
+    }
+    .intro-block h2 {
+      font-size: 1.6rem;
+      font-weight: 450;
+      color: #08564f;
+      margin-bottom: 16px;
+    }
+    .intro-block p {
+      margin-bottom: 14px;
+    }
+    .intro-block .insight-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #b0d3cd;
+    }
+    .insight-item {
+      background: #fff;
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-size: 0.92rem;
+      color: #045f57;
+      border: 1px solid #93cdc5;
+    }
+
+    /* FAQ 摘要 (简洁卡片组) */
+    .faq-summary {
+      margin: 40px 0 32px;
+    }
+    .faq-summary h2 {
+      font-size: 1.5rem;
+      font-weight: 450;
+      color: #0d5d56;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: 20px;
+      padding: 16px 18px;
+      border: 1px solid #c6e3de;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    }
+    .faq-item dt {
+      font-weight: 500;
+      color: #115e56;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+    .faq-item dd {
+      font-size: 0.92rem;
+      color: #2c504b;
+      margin-top: 2px;
+    }
+
+    /* 底部链接 + 简洁脚注 */
+    .bottom-links {
+      margin: 48px 0 28px;
+      padding: 20px 0 10px;
+      border-top: 1px solid #c4ded9;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .bottom-links .ref {
+      font-size: 0.9rem;
+      color: #2e605a;
+    }
+    .bottom-links .ref a {
+      font-weight: 500;
+    }
+    .footer-note {
+      font-size: 0.82rem;
+      color: #537b76;
+      margin-top: 6px;
+    }
+
+    /* 移动端微调 */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      .hero {
+        padding: 44px 16px 36px;
+      }
+      .intro-block {
+        padding: 28px 18px;
+      }
+      .bottom-links {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Hero 区：资料整理与信息索引入口 -->
+    <header class="hero">
+      <h1>比赛笔记 · 信息索引</h1>
+      <p>从赛程、回放、数据到实时动态，把 <a href="https://qq-watchtv.com">NBA直播</a> 相关的资料按主题整理成索引，方便你快速找到需要的场次与内容。</p>
+      <span class="tagline">一个偏向档案整理的起点</span>
+    </header>
+
+    <!-- 优势区：网格卡片 — 整理角度 -->
+    <div class="grid-cards">
+      <div class="card">
+        <h3>赛程·时间线</h3>
+        <p>按日期、球队、轮次梳理常规赛与季后赛的直播时间，减少反复查找日历的麻烦。</p>
+      </div>
+      <div class="card">
+        <h3>回放与集锦</h3>
+        <p>赛后录像、关键球剪辑、战术回合，聚合不同来源的有限片段，方便回顾细节。</p>
+      </div>
+      <div class="card">
+        <h3>球队·数据手册</h3>
+        <p>胜率、得分分布、交锋记录，以简表形式整理，供赛前参考或赛季追踪。</p>
+      </div>
+      <div class="card">
+        <h3>直播流·链接库</h3>
+        <p>稳定信号源与备用通道归类存放，每次观赛前可以快速筛选当前可用的 <a href="https://qq-watchtv.com">NBA直播</a> 入口。</p>
+      </div>
+    </div>
+
+    <!-- 说明区：从资料整理的角度展开 -->
+    <section class="intro-block">
+      <h2>为什么从索引角度出发？</h2>
+      <p>过去几年，NBA 比赛的观看方式越来越碎片化：平台分散、时区不同、回放资源各有差异。这里尝试以「资料整理」的视角，把常见的直播信息、赛程规律、数据页面聚拢到一个叙述框架里，不追求实时推送，而是提供一个可以常回来翻查的笔记式页面。</p>
+      <p>比如每周的焦点战、背靠背赛程、球队近期状态，都会在对应卡片或列表中留下整理痕迹。你可以把这里当作一个轻量的信息锚点，需要找某场比赛时，再顺着索引去 <a href="https://qq-watchtv.com">NBA直播</a> 确认具体信号。</p>
+      <div class="insight-line">
+        <span class="insight-item">📋 按月份归档</span>
+        <span class="insight-item">🏀 球队胜负走势</span>
+        <span class="insight-item">⏱️ 加时赛记录</span>
+        <span class="insight-item">📺 信号备注</span>
+      </div>
+    </section>
+
+    <!-- FAQ 摘要：几个常见信息点 -->
+    <section class="faq-summary">
+      <h2>常见信息摘要</h2>
+      <dl class="faq-grid">
+        <div class="faq-item">
+          <dt>常规赛一般几点开始？</dt>
+          <dd>北京时间上午 8:00–11:30 为主力时段，周末偶尔有凌晨场次。建议提前 15 分钟确认信号。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>回放通常多久更新？</dt>
+          <dd>多数平台赛后 2–4 小时内放出全场录像，集锦会更早。具体视版权方安排而定。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>如何找到某支球队的近期赛程？</dt>
+          <dd>利用球队名称或缩写（如 LAL、BOS）在资料索引中匹配，或通过直播页面的筛选功能查看。</dd>
+        </div>
+        <div class="faq-item">
+          <dt>多信号源怎么选？</dt>
+          <dd>优先选择标注「稳定」或「主信号」的链接，备用通道适合高峰时段或主源卡顿时使用。</dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- 底部链接 + 简洁脚注 -->
+    <footer class="bottom-links">
+      <div class="ref">
+        <span>📌 主要索引来源：</span>
+        <a href="https://qq-watchtv.com">NBA直播</a>
+        <span class="footer-note"> · 信息整理聚合，非官方页面</span>
+      </div>
+      <div class="footer-note">
+        页面内容仅供资料参考，实际比赛时间与信号以官方渠道为准。
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
